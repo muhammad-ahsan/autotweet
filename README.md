@@ -1,11 +1,9 @@
 # autotweet
 
-
-1. A dockerized REST API which encapsulates a machine learning based tweet model
-2. A machine learning model based on markov chain.
-3. Serve as standalone tweet generative model
+1. A dockerized REST API that encapsulates a machine learning-based tweet model
+2. A machine learning model based on the Markov chain.
+3. Serve as a standalone tweet generative model
 4. Given a request, the model provides a tweet. Can be parameterized in future
-
 
 
 # Build Docker
