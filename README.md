@@ -13,7 +13,7 @@ docker build -t autotweet .
 docker run -p 8000:8000 autotweet
 
 # API Interface
-http://0.0.0.0:8000
-http://0.0.0.0:8000/tweet
-http://0.0.0.0:8000/health
-http://0.0.0.0:8000/docs
+1. http://0.0.0.0:8000
+2. http://0.0.0.0:8000/tweet
+3. http://0.0.0.0:8000/health
+4. http://0.0.0.0:8000/docs
