@@ -31,7 +31,7 @@ async def root():
 
 @app.get("/tweet")
 async def predict():
-    tweet = post_processing_tweet(' '.join(markov_chain.walk(15)))
+    tweet = post_processing_tweet(' '.join(markov_chain.simulate(15)))
     return json.dumps({"timestamp": str(datetime.now()),
                        "response_id": str(uuid.uuid4()),
                        "tweet": tweet})
