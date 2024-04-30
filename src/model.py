@@ -3,7 +3,6 @@ import string
 import pickle
 from abc import ABC
 
-
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
@@ -26,7 +25,7 @@ class LLMTweeter(Tweeter):
         super().__init__()
         self._model_dir = "models/gpt2"
         if not os.path.exists(self._model_dir):
-            print("Model does not exist")
+            print("Model does not exist. Downloading model...")
 
             # Download the tokenizer and model
             self._tokenizer = GPT2Tokenizer.from_pretrained(f"gpt2")
@@ -35,7 +34,7 @@ class LLMTweeter(Tweeter):
             self._tokenizer.save_pretrained(self._model_dir)
             self._model.save_pretrained(self._model_dir)
         else:
-            print("Model already exists")
+            print("Model already exists. Loading model...")
             self._tokenizer = GPT2Tokenizer.from_pretrained(self._model_dir)
             self._model = GPT2LMHeadModel.from_pretrained(self._model_dir)
 
