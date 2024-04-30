@@ -8,8 +8,9 @@ name = "pypi"
 fastapi = "*"
 uvicorn = "*"
 pydtmc = "*"
+torch  = "*"
+torchvision = "*"
 transformers = "*"
-gpt_2_simple = "*"
 
 [dev-packages]
 
