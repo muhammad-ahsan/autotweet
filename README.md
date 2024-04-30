@@ -21,6 +21,21 @@ The tweet generation model is a custom-built Markov chain model trained using a 
 
 Overall, the model is designed to capture the dynamics and patterns present in the tweet dataset, allowing for the generation of new tweets that reflect the language and structure observed in the training data.
 
+### Large Language Model (LLM)
+
+It utilizes the GPT-2 model from Hugging Face for text generation tasks offline. This project aims to [state the main goal or purpose of your project].
+
+#### Features
+
+- **Text Generation**: Utilizes the GPT-2 model for generating human-like text.
+- **Offline Usage**: The GPT-2 model is used offline, allowing for privacy and customizability.
+- **Customizable Parameters**: Parameters such as `max_length`, `temperature`, `top_p`, and `do_sample` can be adjusted to control the behavior of text generation.
+- **Easy Integration**: Can be easily integrated into existing projects or used as a standalone tool for text generation tasks.
+
+#### Dependency
+
+- [Hugging Face Transformers](https://github.com/huggingface/transformers)
+
 
 ## How to Build Docker
 docker build -t autotweet .
