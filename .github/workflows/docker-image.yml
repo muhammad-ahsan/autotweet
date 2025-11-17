@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "*" ]
 
 jobs:
   docker:
@@ -19,14 +19,19 @@ jobs:
           install: true
 
       - name: Login to DockerHub
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       
-      - name: Build
-        run: docker build -t mahsan/autotweet:latest .
+      - name: Set Docker Image Tag
+        run: echo "IMAGE_TAG=${GITHUB_REF_NAME}-$(echo $GITHUB_SHA | cut -c1-8)" >> $GITHUB_ENV
+      
+      - name: Build Docker image
+        run: |
+            docker buildx build \
+              --load \
+              -t  ${{ secrets.DOCKER_HUB_USERNAME }}/autotweet:${IMAGE_TAG} .
 
       - name: Push
-        run: docker push mahsan/autotweet:latest
+        run: docker push  ${{ secrets.DOCKER_HUB_USERNAME }}/autotweet:${IMAGE_TAG}

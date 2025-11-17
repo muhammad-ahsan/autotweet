@@ -58,3 +58,14 @@ http://0.0.0.0:8000/docs
 2. http://0.0.0.0:8000/tweet
 3. http://0.0.0.0:8000/health
 4. http://0.0.0.0:8000/docs
+
+
+## Adding gitconfigs (Run on local machine)
+cd autotweet
+
+git config --local include.path ../.gitconfig
+
+### Verify Loading
+git config --get pull.rebase
+
+(It must print true / false whatever is inside .gitconfig)
