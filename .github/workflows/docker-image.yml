@@ -29,7 +29,7 @@ jobs:
         run: |
             docker buildx build \
               --load \
-              -t ${{secrets.DOCKER_HUB_USERNAME }}/autotweet:latest .
+              -t mahsan/autotweet:latest .
 
       - name: Push
-        run: docker push ${{secrets.DOCKER_HUB_USERNAME }}/autotweet:latest
+        run: docker push mahsan/autotweet:latest
