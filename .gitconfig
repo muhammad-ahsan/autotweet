@@ -1,2 +1,18 @@
+# To apply to your git  
+# git config --local include.path ../.gitconfig
+
 [pull]
+    # Always rebase instead of merge when pulling
     rebase = true
+
+[rebase]
+    # Automatically stash and reapply local changes during rebase/pull
+    autoStash = true
+
+[fetch]
+    # Automatically prune stale remote-tracking branches on fetch
+   prune = true
+
+# Automatically delete local branches that have been removed from the remote.
+[alias]
+   clean-branches = "!git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
