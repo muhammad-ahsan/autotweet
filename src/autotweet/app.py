@@ -5,7 +5,7 @@ from datetime import datetime
 import uvicorn
 from fastapi import FastAPI
 
-from src.model import Tweeter, TweeterFactory
+from src.autotweet.model import Tweeter, TweeterFactory
 
 app = FastAPI()
 tweeter: Tweeter = TweeterFactory.create_instance()

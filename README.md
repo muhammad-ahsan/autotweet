@@ -37,16 +37,22 @@ It utilizes the GPT-2 model from Hugging Face for text generation tasks offline.
 - [Hugging Face Transformers](https://github.com/huggingface/transformers)
 
 
-## How to Build Docker
+
+## Poetry as Dependency Management 
+poetry run python -m autotweet.app
+
+## Poetry with uvicorn
+poetry run uvicorn autotweet.app:app --reload
+
+## Dockerization
 docker build -t autotweet .
 
-## Run Docker
 docker run -p 8000:8000 autotweet
 
-## Backend FastAPI Interface
+## API Interface
 http://0.0.0.0:8000/docs
 
-## API Interface
+## Other API Interface
 1. http://0.0.0.0:8000
 2. http://0.0.0.0:8000/docs
 2. http://0.0.0.0:8000/tweet
