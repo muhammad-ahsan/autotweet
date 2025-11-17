@@ -1,20 +1,26 @@
-# Use official Python base
 FROM python:3.11-slim
 
-# Install Poetry
-RUN pip install --no-cache-dir poetry==2.2.1
-
-# Set workdir
 WORKDIR /app
 
-# Copy project files
-COPY pyproject.toml README.md ./
+# Install system dependencies required for building Python packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        curl \
+        && rm -rf /var/lib/apt/lists/*
+
+# Install Poetry and clean cache
+RUN pip install --no-cache-dir "poetry>=2.2,<2.3"
+
+
+COPY pyproject.toml poetry.lock* README.md /app/
+
+# Install dependencies (no dev, no venv)
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi --without dev --no-root
+
+# Copy project code and models
 COPY src/ src/
 COPY models/ models/
-
-# Install dependencies (no dev deps, no venv creation)
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi --without dev
 
 # Expose FastAPI port
 EXPOSE 8000
