@@ -1,18 +1,23 @@
+# Use official Python base
 FROM python:3.11-slim
 
-RUN pip install --upgrade pip setuptools
-RUN pip install pipenv
-RUN apt-get -q update && apt-get install -y --no-install-recommends gcc supervisor && rm -rf /var/lib/apt/lists/*
+# Install Poetry
+RUN pip install --no-cache-dir poetry==2.2.1
 
-WORKDIR autotweet
+# Set workdir
+WORKDIR /app
 
-COPY main.py .
-COPY src ./src
-COPY models/markov-chain ./models/markov-chain
-COPY Pipfile .
-COPY Pipfile.lock .
+# Copy project files
+COPY pyproject.toml README.md ./
+COPY src/ src/
+COPY models/ models/
 
-RUN pipenv install --system --deploy --ignore-pipfile --verbose
+# Install dependencies (no dev deps, no venv creation)
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi --without dev
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-# CMD ["python", "main.py"]
+# Expose FastAPI port
+EXPOSE 8000
+
+# Run uvicorn via Poetry
+CMD ["poetry", "run", "uvicorn", "autotweet.app:app", "--host", "0.0.0.0", "--port", "8000"]
