@@ -19,7 +19,6 @@ jobs:
           install: true
 
       - name: Login to DockerHub
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
@@ -29,7 +28,7 @@ jobs:
         run: |
             docker buildx build \
               --load \
-              -t mahsan/autotweet:latest .
+              -t  ${{ secrets.DOCKER_HUB_USERNAME }}/autotweet:latest .
 
       - name: Push
-        run: docker push mahsan/autotweet:latest
+        run: docker push  ${{ secrets.DOCKER_HUB_USERNAME }}/autotweet:latest
